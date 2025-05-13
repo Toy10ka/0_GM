@@ -1,0 +1,34 @@
+#ビルドと起動をコマンド命令するのが面倒くさいからyamlを書く (代行業者)
+#----------------------------------------------------
+
+#ビルド要件：docker/Dockerfileにある．ビルドコンテキストは"．"
+#docker build -f docker/Dockerfile -t 0gm-dev .
+#起動要件：プロジェクト全体をbind
+#docker run --gpus all -it --rm --mount type=bind, src=pwd, dst=/app 0gm-dev
+
+#----------------------------------------------------
+# docker-compose.yml
+services:
+  0gm: 
+    #イメージのビルド方法を指定 (buildコマンド分解しただけ)
+    build:
+      context: ..                         # ビルドコンテキストはリポジトリ直下(ymlの一個上)
+      dockerfile: docker/Dockerfile       # ビルドコンテキストから見たDockerfileの場所
+    image: 0gm-dev                        # イメージ名
+
+    #ボリューム定義 (ホスト側パス:コンテナ側パス:オプション)
+    volumes:
+      - ../../0GM:/app                    #appにmountしたいパスを相対指定(どのPCからでもできるように)
+      - ../data:/data:ro                  #dataにmount.Read-Only:コンテナ内から書き込めない
+
+    # NVIDIA GPU を使うときの指定
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    # -it オプション（対話モード + コンテナ内擬似ターミナル）
+    stdin_open: true
+    tty: true
+
+    # 起動時に bash
+    command: bash

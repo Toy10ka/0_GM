@@ -1,0 +1,20 @@
+// コンテナをどう作って、どう起動して、VS Code をどう接続するか
+{
+  "name": "0GM Dev", // コンテナ設定の表示名。VS Code の左下ステータスバーに出るだけ（機能には無関係）
+  "dockerComposeFile": ["../docker/docker-compose.yml"], // どの Compose を使うか。配列なので複数指定可。パスはdevcontainer.json からの相対
+  "service": "0gm", // Compose 内で「どのサービス（コンテナ）にアタッチするか」
+  "workspaceFolder": "/app", // コンテナ内で VS Code が開く作業ディレクトリ（cd した状態になる）
+
+  // VS Code（コンテナ内で動いているサーバ側）の「ユーザー設定」を上書き
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/bin/python" // Python 拡張が最初に選ぶインタープリタを固定
+      },
+      "extensions": [ // コンテナ内に VS Code 拡張を自動インストール
+        "ms-python.python", // （Python コード実行／デバッグ）
+        "ms-python.vscode-pylance" // （型情報＋高速補完）
+      ]
+    }
+  }
+}
