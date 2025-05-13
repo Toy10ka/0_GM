@@ -3,6 +3,9 @@ envGM/
 venv/
 .venv/
 
+# data
+data/
+
 # Python キャッシュ
 __pycache__/
 
