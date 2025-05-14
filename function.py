@@ -14,3 +14,24 @@ def normal(x, mu=0, sigma=1):
     return y
 
 #----------------------------------------------------
+#多次元ガウス分布
+def multivariate_normal(x, mu, cov):
+    """
+    x: 特徴(D,) 
+    mu: (D,)
+    sigma: (D, D)
+    """
+    # 構成要素
+    det = np.linalg.det(cov)
+    inv = np.linalg.inv(cov)
+    D = len(x)
+
+    # 係数
+    z = 1 / np.sqrt((2*np.pi) ** D * det)
+
+    # exp
+    y = z * np.exp((x-mu).T @ inv @ (x-mu) / -2.0) # @: np.dot
+
+    return y
+
+#----------------------------------------------------
