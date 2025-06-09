@@ -12,17 +12,13 @@ ENV PYTHONUNBUFFERED=1
 # コンテナ起動後すぐに cd /app 相当の状態になる
 WORKDIR /app
 
-# 依存リストのみコンテナ内の /app にコピー (ビルドのたびに変わらないから)
 # 後続の依存インストールレイヤをキャッシュ利用できる
 COPY requirements.txt ./ 
 
 # ダウンロードしたパッケージのキャッシュを残さずにインストール
-#（イメージが小さくなる代わりに毎回ダウンロードが発生）
 RUN pip install --no-cache-dir -r requirements.txt
 
-#COPY . ./ <-開発中で頻繁に増減するファイルはマウントしてコンテナに直接同期するべき
-
-#git入れる
+#git
 #インストール可能なパッケージの一覧更新ー＞依存関係-> index ファイルはインストール後は不要なので削除
 RUN apt-get update \ 
   && apt-get install -y git \
