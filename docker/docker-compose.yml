@@ -1,13 +1,5 @@
-#ビルドと起動をコマンド命令するのが面倒くさいからyamlを書く (代行業者)
-#----------------------------------------------------
-
-#ビルド要件：docker/Dockerfileにある．ビルドコンテキストは"．"
-#docker build -f docker/Dockerfile -t 0gm-dev .
-#起動要件：プロジェクト全体をbind
-#docker run --gpus all -it --rm --mount type=bind, src=pwd, dst=/app 0gm-dev
-
-#----------------------------------------------------
 # docker-compose.yml
+#----------------------------------------------------
 services:
   0gm: 
     #イメージのビルド方法を指定 (buildコマンド分解しただけ)
