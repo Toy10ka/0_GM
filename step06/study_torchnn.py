@@ -14,8 +14,7 @@ print(W) # ->tensor([[0.]], requires_grad=True)
 print(b) # ->tensor([0.], requires_grad=True)
 
 #----------------------------------------------------
-# Mudule継承をやってみよう
-
+# Mudule継承
 class Model(nn.Module): # nn.Module継承
     def __init__(self):
         # 親クラスのコンストラクタ呼び出し
