@@ -9,10 +9,10 @@
 - `docker/` : GPU 対応の開発環境を用意する Dockerfile と docker-compose 設定  
 
 🔧 **環境準備**  
--  Docker を利用する場合は `docker/docker-compose.yml` を参照  
+- Docker を利用する場合は `docker/docker-compose.yml` を参照
   - リポジトリルート (`../../0GM`) をコンテナの `/app` にマウント  
   - ホスト側 `data` ディレクトリ (`../data`) を `/data` に読み取り専用 (`:ro`) でマウント
 
 💡 **その他メモ**
--  実験用スクリプトが中心のため、一連の学習が終わり次第コード整理を行う予定
+- 実験用スクリプトが中心のため、一連の学習が終わり次第コード整理を行う予定
 
