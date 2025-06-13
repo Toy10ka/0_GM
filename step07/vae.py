@@ -152,4 +152,22 @@ for epoch in range(epochs):
     print(loss_avg)
 
 #----------------------
-# 画像生成
+# 画像生成 (推論だけなのでno_grad)
+with torch.no_grad():
+    sample_size = 64 # 枚数
+    z = torch.randn(sample_size, latent_dim) # ランダムに潜在変数を生成
+    x = model.decoder(z) # 画像生成
+    generated_images = x.view(sample_size, 1, 28, 28) # 画像を変換
+
+# 生成された画像をgrid状に並べる
+grid_img = torchvision.utils.make_grid(
+    generated_images,
+    nrow=8, # 1行あたりの枚数8
+    padding=2, # 画像間の余白2px
+    normalize=True #  0-1正規化
+)
+
+# 表示
+plt.imshow(grid_img.permute(1, 2, 0)) # pltは(H,W,C)
+plt.axis("off") # 目盛り・枠を非表示
+plt.show()
