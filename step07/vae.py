@@ -20,7 +20,7 @@ batch_size = 32
 #-------------------
 # エンコーダ(二層NN)
 class Encoder(nn.Module):
-    def __init__(self, input_dim, hidden_dim, latent_dim): # 自動追跡
+    def __init__(self, input_dim, hidden_dim, latent_dim): 
         super().__init__()
         # 1層目
         self.linear = nn.Linear(input_dim, hidden_dim)
